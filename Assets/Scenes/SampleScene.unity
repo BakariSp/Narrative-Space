@@ -1995,7 +1995,7 @@ MonoBehaviour:
   enableKeys: 1
   middleClickToFocus: 1
   doubleClickToFocus: 1
-  allowInterrupt: 1
+  allowInterrupt: 0
   lookAtConstraint: {fileID: 706762909}
 --- !u!114 &706762908
 MonoBehaviour:

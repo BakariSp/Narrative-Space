@@ -43,6 +43,8 @@ export class ChangeCameraPosition extends Behaviour {
       // console.log(this.new_target)
 
       const orbit = this.my_camera?.gameObject.getComponent(OrbitControls);
+      console.log(orbit);
+      // orbit?.worldRotation.EnableRotate = true;
 
       const sceneObject = this.new_target[this.objectIndex];
       for (var i = 0; i < this.new_target.length; i++) {
