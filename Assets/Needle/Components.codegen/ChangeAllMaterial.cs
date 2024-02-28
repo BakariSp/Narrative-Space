@@ -10,6 +10,7 @@ namespace Needle.Typescript.GeneratedComponents
 		public UnityEngine.GameObject @my_gameobject;
 		public void changeMaterial(){}
 		public void toggleWireframe(){}
+		public void togglePointsDisplay(){}
 	}
 }
 
