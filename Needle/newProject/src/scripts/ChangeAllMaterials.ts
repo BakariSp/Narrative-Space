@@ -16,7 +16,7 @@ export class ChangeAllMaterial extends Behaviour {
     private materialEnable = true;
     private displayPoints = false; // New flag for point display toggle
 
-    private wireframeMaterial = new LineBasicMaterial({ color: 0xffffff });
+    private wireframeMaterial = new LineBasicMaterial({ color: 0xff0000 });
     private pointsMaterial = new PointsMaterial({ color: 0xffffff, size: 0.01 }); // Customize the color and size as needed
 
     

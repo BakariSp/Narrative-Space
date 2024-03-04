@@ -3,7 +3,7 @@ import { Vector3 } from "three";
 
 export class TimedSpawn extends Behaviour {
     @serializeable(GameObject)
-    object?: GameObject;
+    objects?: GameObject[] = [];
 
     interval: number = 1000;
     max: number = 100;
@@ -16,27 +16,40 @@ export class TimedSpawn extends Behaviour {
 
     start(): void {
         console.log("time started");
+        if (this.objects == null) {
+            console.warn("TimedSpawnWithRandomSelection: no objects to spawn");
+            showBalloonMessage("TimedSpawnWithRandomSelection: no objects to spawn", LogType.Warn);
+            return;
+        }
+
+        this.objects.forEach(object => GameObject.setActive(object, false));
+        this.startCoroutine(this.spawn())
     }
 
     awake() {
-        if (!this.object) {
+        if (!this.objects) {
             console.warn("TimedSpawnWithRandomMovement: no object to spawn");
             showBalloonMessage("TimedSpawnWithRandomMovement: no object to spawn", LogType.Warn);
             return;
         }
-        GameObject.setActive(this.object, false);
+        this.objects.forEach(object => GameObject.setActive(object, false));
         this.startCoroutine(this.spawn())
     }
 
     *spawn() {
-        if (!this.object) return;
         while (this.spawned < this.max) {
-            const instance = GameObject.instantiate(this.object);
+            // Randomly select an object from the array
+            const randomIndex = Math.floor(Math.random() * this.objects.length);
+            const selectedObject = this.objects[randomIndex];
+
+            if (!selectedObject) return;
+
+            const instance = GameObject.instantiate(selectedObject);
             GameObject.setActive(instance!, true);
 
             // Apply random movement and rotation
             this.applyRandomMovement(instance);
-            // this.applyRandomRotation(instance);
+            this.applyRandomRotation(instance);
 
             this.spawned += 1;
             yield WaitForSeconds(this.interval / 1000);
@@ -50,8 +63,7 @@ export class TimedSpawn extends Behaviour {
         instance.worldPosition = instance.transform.position.add(new Vector3(randomX, randomY, randomZ));
     }
 
-    // private applyRandomRotation(instance: GameObject) {
-    //     const randomRotation = Quaternion.Euler(Math.random() * this.rotationRange, Math.random() * this.rotationRange, Math.random() * this.rotationRange);
-    //     instance.worldPosition = instance.transform.rotation.multiply(randomRotation);
-    // }
+    private applyRandomRotation(instance: GameObject) {
+        instance.rotateY(Math.random() * this.rotationRange)
+    }
 }

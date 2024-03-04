@@ -17,5 +17,9 @@ MonoBehaviour:
     Projects:
     - ProjectPath: Needle/newProject
     BuilderScene: 
+  - Path: Assets/Scenes/hierarchySpace.unity
+    Projects:
+    - ProjectPath: Needle/newProject
+    BuilderScene: 
   Projects:
   - ProjectPath: Needle/newProject

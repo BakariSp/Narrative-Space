@@ -7,7 +7,7 @@ namespace Needle.Typescript.GeneratedComponents
 {
 	public partial class TimedSpawn : UnityEngine.MonoBehaviour
 	{
-		public UnityEngine.GameObject @object;
+		public UnityEngine.GameObject[] @objects = new UnityEngine.GameObject[]{ };
 		public float @interval = 1000f;
 		public float @max = 100f;
 		public float @moveRange = 5f;
